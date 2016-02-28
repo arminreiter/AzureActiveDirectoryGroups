@@ -31,13 +31,13 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
             return null;
         }
         
-        public List<IGroup> GetAllAdGroups()
+        public List<IGroup> GetGroups()
         {
             // you can read a maximum of 999 groups per query
             return _client.Groups.Take(999).ExecuteAsync().Result.GetAll();
         }
 
-        public List<IGroup> SearchAdGroups(string name)
+        public List<IGroup> SearchGroups(string name)
         {
             return _client.Groups.Where(group => group.DisplayName.StartsWith(name)).
                 Take(999).ExecuteAsync().Result.GetAll();
@@ -60,7 +60,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
                 user.UserPrincipalName.StartsWith(searchString) ||
                 user.DisplayName.StartsWith(searchString) ||
                 user.GivenName.StartsWith(searchString) ||
-                user.Surname.StartsWith(searchString)).ExecuteAsync().Result;
+               user.Surname.StartsWith(searchString)).ExecuteAsync().Result;
             return searchResults.CurrentPage.ToList();
         }
 

@@ -34,7 +34,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups.TestData
 
         public void DeleteTestGroups()
         {
-            var groups = _client.SearchAdGroups(TEST_GROUPS_PREFIX);
+            var groups = _client.SearchGroups(TEST_GROUPS_PREFIX);
             foreach(var g in groups)
             {
                 g.DeleteAsync().Wait();

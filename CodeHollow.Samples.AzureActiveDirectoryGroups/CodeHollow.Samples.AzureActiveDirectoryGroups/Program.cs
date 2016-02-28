@@ -15,11 +15,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
 
             string configName = GetConfigName();
             AzureAdConnector connector = new AzureAdConnector(Configuration.Factory.GetConfiguration(configName));
-
-            TestData.TestDataGenerator tdg = new TestData.TestDataGenerator(connector);
-            tdg.DeleteTestGroups();
-            tdg.DeleteTestUsers();
-
+            
             var tenant = connector.GetTenantDetails();
             if (tenant == null)
             {
@@ -31,7 +27,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
 
             Console.WriteLine("Get all AD groups...");
 
-            List<IGroup> foundGroups = connector.GetAllAdGroups();
+            List<IGroup> foundGroups = connector.GetGroups();
             PrintGroups(foundGroups);
             PrintLine();
 
@@ -45,7 +41,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
 
             Console.WriteLine("Search for group: ");
             var searchStr = Console.ReadLine();
-            foundGroups = connector.SearchAdGroups(searchStr);
+            foundGroups = connector.SearchGroups(searchStr);
             PrintGroups(foundGroups);
 
             Console.WriteLine("done");
