@@ -12,6 +12,8 @@
             {
                 // case "test":
                 //    return new MyTestConfiguration();
+                case "appsettings":
+                    return new AppConfigConfiguration();
                 default:
                     return new MyConfiguration();
             }

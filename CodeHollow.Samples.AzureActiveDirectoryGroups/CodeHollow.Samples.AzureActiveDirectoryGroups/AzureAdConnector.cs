@@ -35,7 +35,6 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
         {
             // you can read a maximum of 999 groups per query
             return _client.Groups.Take(999).ExecuteAsync().Result.GetAll();
-            
         }
 
         public List<IGroup> SearchAdGroups(string name)
@@ -44,7 +43,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
                 Take(999).ExecuteAsync().Result.GetAll();
         }
 
-        internal void CreateUser(IUser user)
+        public void CreateUser(IUser user)
         {
             _client.Users.AddUserAsync(user).Wait();
         }
@@ -54,7 +53,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
             return _client.Users.Take(999).ExecuteAsync().Result.GetAll();
         }
 
-        public List<IUser> SearchUser(string searchString)
+        public List<IUser> SearchUsers(string searchString)
         {
             IUserCollection userCollection = _client.Users;
             var searchResults = userCollection.Where(user =>

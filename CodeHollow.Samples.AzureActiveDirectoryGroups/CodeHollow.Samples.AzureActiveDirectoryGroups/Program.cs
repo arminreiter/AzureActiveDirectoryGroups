@@ -15,7 +15,11 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
 
             string configName = GetConfigName();
             AzureAdConnector connector = new AzureAdConnector(Configuration.Factory.GetConfiguration(configName));
-            
+
+            TestData.TestDataGenerator tdg = new TestData.TestDataGenerator(connector);
+            tdg.DeleteTestGroups();
+            tdg.DeleteTestUsers();
+
             var tenant = connector.GetTenantDetails();
             if (tenant == null)
             {
