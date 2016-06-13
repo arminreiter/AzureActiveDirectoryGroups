@@ -67,10 +67,10 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
             AuthenticationContext authenticationContext = new AuthenticationContext(_config.AuthString, false);
             // Config for OAuth client credentials 
             ClientCredential clientCred = new ClientCredential(_config.ClientId, _config.ClientSecret);
-            AuthenticationResult authenticationResult = authenticationContext.AcquireToken(_config.ResourceUrl,
-                clientCred);
-            string token = authenticationResult.AccessToken;
-            return token;
+            var authTask = authenticationContext.AcquireTokenAsync(_config.ResourceUrl, clientCred);
+            authTask.Wait();
+            AuthenticationResult authenticationResult = authTask.Result;
+            return authenticationResult.AccessToken;
         }
 
         /// <summary>
@@ -83,8 +83,9 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
             {
                 var redirectUri = new Uri("https://localhost");
                 AuthenticationContext authenticationContext = new AuthenticationContext(_config.AuthString, false);
-                AuthenticationResult userAuthnResult = authenticationContext.AcquireToken(_config.ResourceUrl,
-                    _config.ClientIdForUserAuthn, redirectUri, PromptBehavior.Always);
+                var authTask = authenticationContext.AcquireTokenAsync(_config.ResourceUrl, _config.ClientIdForUserAuthn, redirectUri, new PlatformParameters(PromptBehavior.Auto));
+                authTask.Wait();
+                AuthenticationResult userAuthnResult = authTask.Result;
                 _tokenForUser = userAuthnResult.AccessToken;
                 Console.WriteLine("\n Welcome " + userAuthnResult.UserInfo.GivenName + " " +
                                   userAuthnResult.UserInfo.FamilyName);
