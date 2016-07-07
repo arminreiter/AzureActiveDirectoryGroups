@@ -10,7 +10,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
     internal class AzureAuthenticationHelper
     {
         private string _tokenForUser;
-        private IClientConfiguration _config;
+        private readonly IClientConfiguration _config;
 
         private Uri ServiceRoot { get { return new Uri(new Uri(_config.ResourceUrl), _config.TenantId); } }
 

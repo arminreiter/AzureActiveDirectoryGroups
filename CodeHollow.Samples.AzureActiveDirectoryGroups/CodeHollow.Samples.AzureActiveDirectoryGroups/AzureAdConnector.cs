@@ -10,8 +10,8 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups
     // inspired by: https://github.com/Azure-Samples/active-directory-dotnet-graphapi-console
     public class AzureAdConnector
     {
-        ActiveDirectoryClient _client;
-        IClientConfiguration _config;
+        readonly ActiveDirectoryClient _client;
+        readonly IClientConfiguration _config;
 
         public AzureAdConnector(IClientConfiguration config)
         {

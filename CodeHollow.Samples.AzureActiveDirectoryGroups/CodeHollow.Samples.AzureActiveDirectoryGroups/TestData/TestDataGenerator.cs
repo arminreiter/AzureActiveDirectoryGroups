@@ -12,8 +12,7 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups.TestData
         private const string TEST_GROUPS_PREFIX = "Testgroup";
         private const string TEST_USERS_PREFIX = "Testuser";
         private const string TEST_USERS_PASSWORD = "Testpassword";
-
-        AzureAdConnector _client;
+        readonly AzureAdConnector _client;
         public TestDataGenerator(AzureAdConnector client)
         {
             _client = client;
@@ -46,7 +45,10 @@ namespace CodeHollow.Samples.AzureActiveDirectoryGroups.TestData
             for(int i = 1; i <= numberOfUsers; i++)
             {
                 IUser user = new User();
-                user.MailNickname = user.GivenName = user.DisplayName = TEST_USERS_PREFIX + i.ToString().PadLeft(4, '0');
+                string name = TEST_USERS_PREFIX + i.ToString().PadLeft(4, '0');
+                user.MailNickname = name;
+                user.GivenName = name;
+                user.DisplayName = name;
                 user.UserPrincipalName = user.MailNickname + "@" + tenantname;
                 user.PasswordProfile = new PasswordProfile() { Password = TEST_USERS_PASSWORD + i.ToString(), ForceChangePasswordNextLogin = false };
                 user.AccountEnabled = false;

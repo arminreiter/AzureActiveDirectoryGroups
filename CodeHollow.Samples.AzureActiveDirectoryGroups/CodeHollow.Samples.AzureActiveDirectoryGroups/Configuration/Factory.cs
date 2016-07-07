@@ -1,4 +1,6 @@
-﻿namespace CodeHollow.Samples.AzureActiveDirectoryGroups.Configuration
+﻿using System.Globalization;
+
+namespace CodeHollow.Samples.AzureActiveDirectoryGroups.Configuration
 {
     public static class Factory
     {
@@ -8,7 +10,7 @@
         }
         public static IClientConfiguration GetConfiguration(string configName)
         {
-            switch (configName.ToLower())
+            switch (configName.ToLower(CultureInfo.CurrentCulture))
             {
                 // case "test":
                 //    return new MyTestConfiguration();

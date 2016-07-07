@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CodeHollow.Samples.AzureActiveDirectoryGroups
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.SetWindowSize(150 > Console.LargestWindowWidth ? Console.LargestWindowWidth : 150, Console.WindowHeight);
 
